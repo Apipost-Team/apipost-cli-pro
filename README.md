@@ -4,7 +4,7 @@
   </a>
 </p>
 
-`apipost-cli` 是一个基于命令行的 Apipost 接口用例以及测试用例运行工具。它允许您轻松地直接从命令行运行和测试 Apipost 接口用例以及测试用例。它专注于可扩展性，因此您可以轻松地将其与持续集成服务器和构建系统集成。这使得您可以在不需要手动操作的情况下自动化测试和运行 Apipost 接口用例以及测试用例。
+`apipost-cli-pro` 是一个基于命令行的 Apipost 接口用例以及测试用例运行工具。它允许您轻松地直接从命令行运行和测试 Apipost 接口用例以及测试用例。它专注于可扩展性，因此您可以轻松地将其与持续集成服务器和构建系统集成。这使得您可以在不需要手动操作的情况下自动化测试和运行 Apipost 接口用例以及测试用例。
 
 ## 安装
 使用以下命令安装Apipost CLI
@@ -14,14 +14,14 @@ npm install -g apipost-cli-pro
 
 ## 运行
 ```
-apipost8 run https://workspace.apipost.net/open/ci/automated_testing?ci_id=MTkzMDI0MTEwMDU2ODQ5NDA4OjEyOTMzMDc1MDgzNjc3NzEwOjEzMDcyNjE0MDg3OTQ2Mjcy&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxODE0NCwiaXNzIjoiYXBpcG9zdCIsImV4cCI6MTcxNzY5MDAxNX0.wNNw0MbsbobhDcAZmiXJQu6lmhWaES6E2y8YFyKkzm8 -n 5 -r cli,json
+apipost run https://workspace.apipost.net/open/ci/automated_testing?ci_id=MTkzMDI0MTEwMDU2ODQ5NDA4OjEyOTMzMDc1MDgzNjc3NzEwOjEzMDcyNjE0MDg3OTQ2Mjcy&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxODE0NCwiaXNzIjoiYXBpcG9zdCIsImV4cCI6MTcxNzY5MDAxNX0.wNNw0MbsbobhDcAZmiXJQu6lmhWaES6E2y8YFyKkzm8 -n 5 -r cli,json
 ```
 
 ![image.png](https://img.cdn.apipost.cn/upload/user/18144/log/8417e76a-4999-495f-8de9-57680b164765.png "image.png")
 
 ## 选项
 ```
-Usage: apipost8 run [options] <url>
+Usage: apipost run [options] <url>
 
 Options:
   -r, --reporters <reporters>           指定测试报告类型, 支持 cli,html,json  (default: "cli")
