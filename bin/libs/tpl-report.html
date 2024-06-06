@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 
 <head>
   <meta charset="UTF-8" />
@@ -30,7 +30,7 @@
 
     .apipost-report-wrap-tpl .report-info .report-item .label {
       display: inline-block;
-      width: 135px;
+      /* width: 135px; */
       text-align: right;
     }
 
@@ -55,10 +55,11 @@
     .report-title img {
       width: 15px;
       height: 17px;
+      margin-right: 10px;
     }
 
     .report-title .title {
-      padding-left: 10px;
+      /* padding-left: 10px; */
       font-weight: 400;
       font-size: 18px;
       color: #fa7600;
@@ -105,7 +106,7 @@
     .report-info-list .report-info-item {
       display: inline-flex;
       align-items: center;
-      width: 25%;
+      width: 50%;
       padding-bottom: 15px;
     }
 
@@ -157,7 +158,11 @@
       width: 100%;
     }
 
-    .test-detail .test-event-list .test-event-item {}
+    .test-detail .test-event-list .test-event-item {
+      margin-bottom: 16px;
+      border: #eee 1px solid;
+      border-radius: 4px;
+    }
 
     .test-detail .test-event-list .test-event-item .loop {
       padding: 10px 0;
@@ -177,29 +182,57 @@
     }
 
     .test-event-list .test-event-item .panel .status {
-      width: 16px;
-      height: 16px;
-      margin-left: 25px;
-      margin-right: 30px;
+      width: 14px;
+      height: 14px;
+      margin: 0 10px
     }
 
     .test-event-list .test-event-item .panel .index {
-      padding-right: 30px;
+      padding-right: 16px;
       color: #666666;
     }
 
     .test-event-list .test-event-item .panel .method {
-      padding-right: 30px;
-      color: #26cea4;
+      width: 40px;
+      color: #fff;
+      font-size: 10px;
+      margin-left: 4px;
+      margin-right: 16px;
+      font-weight: normal;
+      background: #26cea4;
+      padding: 2px 4px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .test-event-list .test-event-item .panel .method.GET {
+      background: #26cea4
+    }
+
+    .test-event-list .test-event-item .panel .method.POST,
+    .test-event-list .test-event-item .panel .method.PUT {
+      background: #ffb400
+    }
+
+    .test-event-list .test-event-item .panel .method.DELETE {
+      background: #f92814
     }
 
     .test-event-list .test-event-item .panel .name {
       padding-right: 30px;
       color: #666666;
+      max-width: 20%;
+      overflow: hidden;
+      word-break: keep-all;
     }
 
     .test-event-list .test-event-item .panel .link a {
       text-decoration: none;
+      color: #999;
+    }
+
+    .test-event-list .test-event-item .panel .link a:hover {
+      text-decoration: underline
     }
 
     .test-event-list .test-event-item .item-info {
@@ -214,7 +247,8 @@
 
     .test-event-list .test-event-item .item-info span {
       display: inline-block;
-      width: 25%;
+      /* width: 25%; */
+      padding-right: 16px;
     }
 
     .test-event-list .test-event-item .assert-info {
@@ -242,8 +276,9 @@
     .test-event-item .assert-info .response-panel .error {
       display: flex;
       align-items: center;
-      width: 100%;
+      /* width: 100%; */
       height: 34px;
+      padding: 0 12px;
     }
 
     .test-event-item .assert-info .response-panel .success {
@@ -274,16 +309,17 @@
       display: flex;
       align-items: center;
       width: 50%;
+      justify-content: center;
     }
 
     .chart-wrap .api .api-des {
       display: flex;
       flex-direction: column;
-      padding-left: 50px;
+      /* padding-left: 50px; */
     }
 
     .chart-wrap .api .api-des .api-title {
-      padding-bottom: 15px;
+      /* padding-bottom: 15px; */
       font-weight: 600;
       font-size: 16px;
       color: #666666;
@@ -298,12 +334,15 @@
 
     #api-pie,
     #assert-pie {
-      width: 80px;
+      width: 120px;
       height: 80px;
+      font-size: 36px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
-  <script src="https://img.cdn.apipost.cn/cdn/test-report/js/template-web.js"></script>
-  <script src="https://img.cdn.apipost.cn/cdn/test-report/js/echarts.min.js"></script>
 </head>
 
 <body>
@@ -316,38 +355,36 @@
     <div class="report-info">
       <div class="report-item">
         <span class="label">测试时间：</span>
-        <span class="value">{{data.start_at}}</span>
+        <span class="value">{{data.startAt}}</span>
       </div>
       <div class="report-item">
         <span class="label">测试工具：</span>
-        <span class="value"><a href="https://www.apipost.cn/download.html">apipost客户端</a></span>
+        <span class="value"><a href="https://www.apipost.cn/download.html" target="_blank">Apipost客户端</a></span>
       </div>
     </div>
     <div class="dashed"></div>
     <div class="report-title">
       <img src="https://img.cdn.apipost.cn/cdn/test-report/img/doc.png" alt="" />
-      <span class="title">测试结果</span>
+      <span class="title">测试概览</span>
     </div>
     <div class="chart-wrap">
       <div class="api">
-        <div id="api-pie"></div>
+        
         <div class="api-des">
-          <span class="api-title">接口</span>
-          <span class="api-label">接口通过率：{{formatRate({ passed: value?.http?.passed, failure: value?.http?.failure },
-            value?.http?.passed)}}</span>
-          <span class="api-label">接口失败率：{{formatRate({ passed: value?.http?.passed, failure: value?.http?.failure },
-            value?.http?.failure)}}</span>
+          <span class="api-title">接口通过率</span>
+          <!-- <span class="api-label">接口通过率：{{data?.http?.httpPassPer}}</span> -->
+          <!-- <span class="api-label">接口失败率：{{data?.http?.httpUnPassPer}}</span> -->
         </div>
+        <div id="api-pie">{{data?.http?.httpPassPer}}</div>
       </div>
       <div class="api">
-        <div id="assert-pie"></div>
+        
         <div class="api-des">
-          <span class="api-title">断言</span>
-          <span class="api-label">断言通过率：{{formatRate({ passed: value?.assert?.passed, failure: value?.assert?.failure },
-            value?.assert?.passed)}}</span>
-          <span class="api-label">断言失败率：{{formatRate({ passed: value?.assert?.passed, failure: value?.assert?.failure },
-            value?.assert?.failure)}}</span>
+          <span class="api-title">断言通过率</span>
+          <!-- <span class="api-label">断言通过率：{{data?.assert?.assertPassPer}}</span> -->
+          <!-- <span class="api-label">断言失败率：{{data?.assert?.assertUnPassPer}}</span> -->
         </div>
+        <div id="assert-pie">{{data?.assert?.assertPassPer}}</div>
       </div>
     </div>
     <div class="report-table">
@@ -363,37 +400,37 @@
         <tbody>
           <tr>
             <td>接口</td>
-            <td>{{data.http.failure + data.http.passed}}</td>
-            <td>{{data.http.passed}}</td>
-            <td>{{data.http.failure}}</td>
+            <td>{{data.http.total}}</td>
+            <td>{{data.http.success}}</td>
+            <td>{{data.http.error}}</td>
           </tr>
           <tr>
             <td>断言</td>
-            <td>{{data.assert.failure + data.assert.passed}}</td>
-            <td>{{data.assert.passed}}</td>
-            <td>{{data.assert.failure}}</td>
+            <td>{{data.assert.total}}</td>
+            <td>{{data.assert.success}}</td>
+            <td>{{data.assert.error}}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="report-info-list">
       <div class="report-info-item">
-        <span>开始时间 : {{data.start_at}}</span>
+        <span>开始时间 : {{data.startAt}}</span>
       </div>
       <div class="report-info-item">
-        <span>结束时间 : {{data.end_at}}</span>
+        <span>结束时间 : {{data.endAt}}</span>
       </div>
       <div class="report-info-item">
-        <span>总耗时 : {{data.total_time}}</span>
+        <span>总耗时 : {{data.total_time}} ms</span>
       </div>
       <div class="report-info-item">
-        <span>总响应时间 : {{data.total_response_time}}ms</span>
+        <span>总响应时间 : {{data.total_response_time}} ms</span>
       </div>
       <div class="report-info-item">
-        <span>平均响应时间 : {{data.avg_response_time}}ms</span>
+        <span>平均响应时间 : {{data.avg_response_time}} ms</span>
       </div>
       <div class="report-info-item">
-        <span>总响应数据大小 : {{data.total_response_size}}kb</span>
+        <span>总响应数据大小 : {{data.total_response_size}} Byte</span>
       </div>
       <div class="report-info-item">
         <span>循环次数 : {{data.total_request_count}}</span>
@@ -402,91 +439,45 @@
     <div class="dashed"></div>
     <div class="report-title">
       <img src="https://img.cdn.apipost.cn/cdn/test-report/img/doc.png" alt="" />
-      <span class="title">测试情况</span>
+      <span class="title">测试详情</span>
     </div>
     <div class="action-wrap">
       <div class="test-detail failed">
-        <div class="toggle-arrow">
-          <span class="icon-bg">
-            <img src="https://img.cdn.apipost.cn/cdn/test-report/img/arrow.png" class="arrow" alt="" />
-          </span>
-          <span class="title">失败情况</span>
-        </div>
-        <div class="test-event-list show"> 
-          {{each data.list item key}} 
-          <div data-text="{{key}}" id="{{key}}"
+        <div class="test-event-list show"> {{each data.list item key}} <div data-text="{{key}}" id="{{key}}"
             class="test-event-item">
-            <div class="panel">
-              <img class="status" src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="" />
-              <div class="index">{{key + 1}}</div>
-              <div class="method">{{item?.request?.method}}</div>
-              <span class="name">{{item?.request?.name}}</span>
+            <div div class="panel"> {{if item?.status?.assert == 'OK' && item?.status?.http == 'OK'}} <img
+                class="status" src="https://img.cdn.apipost.cn/cdn/test-report/img/success.png" alt="success" />
+              {{else}} <img class="status" src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="error" />
+              {{/if}} <div class="index">{{key + 1}}</div>
+              <div class="method {{item?.method}}">{{item?.method}}</div>
+              <span class="name">{{item?.name}}</span>
               <div class="link">
-                <a href="{{item?.request?.url}}">{{item?.request?.url}}</a>
+                <a href="{{item?.url}}">{{item?.url}}</a>
               </div>
-            </div>
-            <div class="item-info">
-              <span>请求状况：{{(item?.http_error === 1 || item.assert_error === 1) ? '失败' : '成功'}}</span>
-              <span>状态码：{{item?.response?.data?.response?.code}}</span>
-              <span>响应时间：{{item?.response?.data?.response?.responseTime}}ms</span>
-              <span>响应数据大小：{{item?.response?.data?.response?.responseSize}}kb</span>
-            </div> {{if item?.assert && item?.assert.length > 0}} <div class="assert-info">
-              <span class="assert-label">断言:</span>
-              <div class="response-panel"> {{each item?.assert assert cKey}} {{if assert.status === 'error'}} <div
+            </div> {{if item?.code > 0}} <div class="item-info"> {{if item?.code > 0}} <span>状态码：{{item?.code}}</span>
+              <span>响应时间：{{item?.response_time}}ms</span>
+              <span>响应数据大小：{{item?.response_size}}kb</span> {{/if}}
+            </div> {{/if}} <div class="assert-info">
+              <div class="response-panel"> {{if item?.status?.http != 'OK'}} <div class="error">
+                  <!-- <img src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="error" /> -->
+                  <span>{{item?.status?.http}}</span>
+                </div> {{else}} <div class="success">
+                  <!-- <img src="https://img.cdn.apipost.cn/cdn/test-report/img/success.png" alt="success" /> -->
+                  <span>Request passed!</span>
+                </div> {{/if}} </div>
+            </div> {{if item?.status?.assert != 'OK' && item?.status?.assert.length > 0}} <div class="assert-info">
+              <div class="response-panel"> {{each item?.status?.assert assert cKey}} {{if !assert.passed}} <div
                   class="error">
-                  <img src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="" />
-                  <span>{{assert?.expect}}</span>
-                </div> {{/if}} {{if assert.status !== 'error'}} <div class="success">
-                  <img src="https://img.cdn.apipost.cn/cdn/test-report/img/success.png" alt="" />
-                  <span>{{assert?.expect}}</span>
+                  <!-- <img src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="error" /> -->
+                  <span>{{assert?.name}} {{assert?.error?.name}}: {{assert?.error?.message}}</span>
+                </div> {{else}} <div class="success">
+                  <!-- <img src="https://img.cdn.apipost.cn/cdn/test-report/img/success.png" alt="success" /> -->
+                  <span>{{assert?.name}} passed!</span>
                 </div> {{/if}} {{/each}} </div>
             </div> {{/if}}
-          </div> 
-          {{/each}} 
-        </div>
+          </div> {{/each}} </div>
       </div>
       <div class="dashed"></div>
-      <div class="test-detail success">
-        <div class="toggle-arrow">
-          <span class="icon-bg">
-            <img src="https://img.cdn.apipost.cn/cdn/test-report/img/arrow.png" alt="" />
-          </span>
-          <span class="title">测试详情</span>
-        </div>
-        <div class="test-event-list show"> 
-          {{each data.list item key}}  
-          <div data-text="{{key}}" id="{{key}}"
-            class="test-event-item">
-            <div class="panel"> {{if item.http_error === -1}} <img class="status"
-                src="https://img.cdn.apipost.cn/cdn/test-report/img/success.png" alt="" /> {{/if}} {{if item.http_error
-              === 1}} <img class="status" src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="" />
-              {{/if}} <div class="index">{{key + 1}}</div>
-              <div class="method">{{item?.request?.method}}</div>
-              <span class="name">{{item?.request?.name}}</span>
-              <div class="link">
-                <a href="{{item?.request?.url}}">{{item?.request?.url}}</a>
-              </div>
-            </div>
-            <div class="item-info">
-              <span>请求状况：{{(item?.http_error === 1 || item.assert_error === 1) ? '失败' : '成功'}}</span>
-              <span>状态码：{{item?.response?.data?.response?.code}}</span>
-              <span>响应时间：{{item?.response?.data?.response?.responseTime}}ms</span>
-              <span>响应数据大小：{{item?.response?.data?.response?.responseSize}}kb</span>
-            </div> {{if item?.assert && item?.assert.length > 0}} <div class="assert-info">
-              <span class="assert-label">断言:</span>
-              <div class="response-panel"> {{each item?.assert assert cKey}} {{if assert.status === 'error'}} <div
-                  class="error">
-                  <img src="https://img.cdn.apipost.cn/cdn/test-report/img/error.png" alt="" />
-                  <span>{{assert?.expect}}</span>
-                </div> {{/if}} {{if assert.status !== 'error'}} <div class="success">
-                  <img src="https://img.cdn.apipost.cn/cdn/test-report/img/success.png" alt="" />
-                  <span>{{assert?.expect}}</span>
-                </div> {{/if}} {{/each}} </div>
-            </div> {{/if}}
-          </div> 
-          {{/each}} 
-        </div>
-      </div>
     </div>
   </div>
 </body>

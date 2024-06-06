@@ -148,31 +148,52 @@ async function reportersHOOK(data, option) {
 }
 
 function reportersHTML(data, option) {
-    console.error(`\nNot supported for exporting HTML format reports temporarily, coming soon.`);
-    // try {
-    //     console.log(data)
-    //     var html = template(__dirname + '/tpl-report.html', data);
+    try {
+        // 接口通过率
+        const httpPassPer = `${100 * _.floor(_.get(data, 'data.http.success') / _.get(data, 'data.http.total'), 4)}%`;
+        const httpUnPassPer = `${100 * _.floor(_.get(data, 'data.http.error') / _.get(data, 'data.http.total'), 4)}%`;
 
-    //     try {
-    //         if (!fs.existsSync(option?.outDir)) {
-    //             fs.mkdirSync(option?.outDir, { recursive: true }); // 递归创建目录
-    //         }
+        _.assign(_.get(data, 'data.http'), {
+            httpPassPer, httpUnPassPer
+        })
 
-    //         const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD_HHmmss')}`;
-    //         const filePath = path.join(option?.outDir, `${fileName}.html`);
+        // 断言通过率
+        const assertPassPer = `${100 * _.floor(_.get(data, 'data.assert.success') / _.get(data, 'data.assert.total'), 4)}%`;
+        const assertUnPassPer = `${100 * _.floor(_.get(data, 'data.assert.error') / _.get(data, 'data.assert.total'), 4)}%`;
 
-    //         try {
-    //             fs.writeFileSync(filePath, html);
-    //             console.log(`\nHTML report has been written to file ${filePath} successfully! `);
-    //         } catch (e) {
-    //             console.error("The test report failed to write to the file: ", String(e));
-    //         }
-    //     } catch (e) {
-    //         console.error("Report directory creation failed. Please try using sudo permission: ", String(e))
-    //     }
-    // } catch (e) {
-    //     console.error(`Error during create html request: ${String(e)}`);
-    // }
+        _.assign(_.get(data, 'data.assert'), {
+            assertPassPer, assertUnPassPer
+        })
+
+        // 开始时间和结束时间
+        const startAt = new Date(_.get(data, 'data.start_at', 0)).toUTCString();
+        const endAt = new Date(_.get(data, 'data.end_at', 0)).toUTCString();
+        _.assign(_.get(data, 'data'), {
+            startAt, endAt
+        })
+
+        var html = template(__dirname + '/tpl-report.html', data);
+
+        try {
+            if (!fs.existsSync(option?.outDir)) {
+                fs.mkdirSync(option?.outDir, { recursive: true }); // 递归创建目录
+            }
+
+            const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD_HHmmss')}`;
+            const filePath = path.join(option?.outDir, `${fileName}.html`);
+
+            try {
+                fs.writeFileSync(filePath, html);
+                console.log(`\nHTML report has been written to file ${filePath} successfully! `);
+            } catch (e) {
+                console.error("The test report failed to write to the file: ", String(e));
+            }
+        } catch (e) {
+            console.error("Report directory creation failed. Please try using sudo permission: ", String(e))
+        }
+    } catch (e) {
+        console.error(`Error during create html request: ${String(e)}`);
+    }
 }
 
 
