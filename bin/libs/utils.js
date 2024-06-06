@@ -112,7 +112,9 @@ function reportersJSON(data, option) {
             fs.mkdirSync(option?.outDir, { recursive: true }); // 递归创建目录
         }
 
-        const filePath = path.join(option?.outDir, `apipost-reports-${dayjs().format('YYYY-MM-DD HH:mm:ss')}.json`);
+        const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD HH:mm:ss')}`;
+        const filePath = path.join(option?.outDir, `${fileName}.json`);
+
         try {
             fs.writeFileSync(filePath, JSON.stringify(data));
             console.log(`\nJSON report has been written to file ${filePath} successfully! `);
