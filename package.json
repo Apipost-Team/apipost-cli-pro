@@ -1,6 +1,6 @@
 {
   "name": "apipost-cli-pro",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "Apipost 命令行运行工具。适合Apipost8及以上版本。",
   "main": "./dist/index.js",
   "files": [
@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean-dist": "rm -rf ./dist",
     "copy-report": "cp -r ./bin/apipost-reports ./dist/apipost-cli/",
-    "build": "npm run clean-dist && ncc build bin/cli.js  --external uglify-js -o dist/ && npm run copy-report"
+    "build": "npm run clean-dist && ncc build bin/cli.js  --external uglify-js --external deasync -o dist/ && npm run copy-report"
   },
   "bin": {
     "apipost": "./dist/index.js",
@@ -25,13 +25,14 @@
     "colors": "^1.4.0",
     "commander": "^12.1.0",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.3.2"
-  },
-  "dependencies": {
+    "node-fetch": "^3.3.2",
     "apipost-runtime8": "^3.0.34",
     "art-template": "^4.13.2",
     "cli-progress": "^3.12.0",
     "dayjs": "^1.11.11",
-    "electron": "npm:lodash@^4.17.21"
+    "electron": "npm:lodash@^4.17.21"    
+  },
+  "dependencies": {
+    "deasync":"^0.1.29"
   }
 }

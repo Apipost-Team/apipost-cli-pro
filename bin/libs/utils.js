@@ -112,7 +112,7 @@ function reportersJSON(data, option) {
             fs.mkdirSync(option?.outDir, { recursive: true }); // 递归创建目录
         }
 
-        const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD HH:mm:ss')}`;
+        const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD_HHmmss')}`;
         const filePath = path.join(option?.outDir, `${fileName}.json`);
 
         try {
@@ -158,7 +158,7 @@ function reportersHTML(data, option) {
     //             fs.mkdirSync(option?.outDir, { recursive: true }); // 递归创建目录
     //         }
 
-    //         const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD HH:mm:ss')}`;
+    //         const fileName = option?.outFile != '' ? option?.outFile : `apipost-reports-${dayjs().format('YYYY-MM-DD_HHmmss')}`;
     //         const filePath = path.join(option?.outDir, `${fileName}.html`);
 
     //         try {
