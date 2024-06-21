@@ -1,6 +1,6 @@
 {
   "name": "apipost-cli-pro",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Apipost 命令行运行工具。适合Apipost8及以上版本。",
   "main": "./dist/index.js",
   "files": [
