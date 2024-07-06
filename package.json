@@ -1,6 +1,6 @@
 {
   "name": "apipost-cli-pro",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Apipost 命令行运行工具。适合Apipost8及以上版本。",
   "main": "./dist/index.js",
   "files": [
@@ -26,7 +26,7 @@
     "commander": "^12.1.0",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",
-    "apipost-runtime8": "^3.0.48",
+    "apipost-runtime8": "^3.0.49",
     "art-template": "^4.13.2",
     "cli-progress": "^3.12.0",
     "dayjs": "^1.11.11",
