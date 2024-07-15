@@ -26,7 +26,7 @@
     "commander": "^12.1.0",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",
-    "apipost-runtime8": "^3.0.49",
+    "apipost-runtime8": "^3.0.54",
     "art-template": "^4.13.2",
     "cli-progress": "^3.12.0",
     "dayjs": "^1.11.11",
