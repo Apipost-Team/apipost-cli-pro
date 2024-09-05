@@ -150,8 +150,8 @@ async function reportersHOOK(data, option) {
 function reportersHTML(data, option) {
     try {
         // 接口通过率
-        const httpPassPer = `${100 * _.floor(_.get(data, 'data.http.success') / _.get(data, 'data.http.total'), 4)}%`;
-        const httpUnPassPer = `${100 * _.floor(_.get(data, 'data.http.error') / _.get(data, 'data.http.total'), 4)}%`;
+        const httpPassPer = _.get(data, 'data.http.total') > 0 ? `${100 * _.floor(_.get(data, 'data.http.success') / _.get(data, 'data.http.total'), 4)}%` : '100%';
+        const httpUnPassPer = _.get(data, 'data.http.total') > 0 ? `${100 * _.floor(_.get(data, 'data.http.error') / _.get(data, 'data.http.total'), 4)}%` : '100%';
 
         _.assign(_.get(data, 'data.http'), {
             httpPassPer, httpUnPassPer
